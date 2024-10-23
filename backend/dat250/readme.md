@@ -16,3 +16,6 @@ docker run --name neo4j-container \
 In docker go to files and change neo4j.conf by uncommenting line:
 
 ``dbms.security.auth_enabled=false``
+
+
+link: https://medium.com/@hassaanistic/unclickable-folder-in-repo-on-github-arrow-on-folder-b8fa21b13858
