@@ -12,7 +12,7 @@ public class AggregatorApplication {
 	private PollDataService pollDataService;
 
 	public static void main(String[] args) throws InterruptedException {
-		SpringApplication.run(AggregatorApplication.class, args).close();
+		SpringApplication.run(AggregatorApplication.class, args);
 	}
 
 	@RabbitListener(queues = "poll-data")

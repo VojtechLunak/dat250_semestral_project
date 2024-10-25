@@ -1,8 +1,5 @@
 package hvl.dat250.messaging;
 
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.ApplicationRunner;
@@ -23,7 +20,8 @@ public class EmitLog {
     @Bean
     public ApplicationRunner runner(RabbitTemplate template) {
         return args -> {
-            template.convertAndSend(ROUTING_KEY, "Hello, world!");
+            System.out.println("Sending message...");
+            template.convertAndSend(ROUTING_KEY, "Poll::" + System.currentTimeMillis());
         };
     }
 
