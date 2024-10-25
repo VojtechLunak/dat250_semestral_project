@@ -2,11 +2,11 @@ package hvl.aggregator.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document(collection = "polls")
 public class PollData {
 
+    @Id
     private String id;
     private String data;
 

@@ -1,4 +1,3 @@
-// src/main/java/com/example/service/PollService.java
 package hvl.aggregator.service;
 
 import hvl.aggregator.model.PollData;
