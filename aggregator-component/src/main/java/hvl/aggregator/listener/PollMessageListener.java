@@ -1,16 +1,16 @@
 package hvl.aggregator.listener;
 
-import hvl.aggregator.service.PollService;
+import hvl.aggregator.service.PollDataService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PollMessageListener {
 
-    private final PollService pollService;
+    private final PollDataService pollDataService;
 
-    public PollMessageListener(PollService pollService) {
-        this.pollService = pollService;
+    public PollMessageListener(PollDataService pollDataService) {
+        this.pollDataService = pollDataService;
     }
 
     @RabbitListener(queues = "poll-data")

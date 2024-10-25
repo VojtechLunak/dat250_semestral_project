@@ -2,11 +2,11 @@ package hvl.aggregator.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
-@Document
+@Document(collection = "polls")
 public class PollData {
 
-    @Id
     private String id;
     private String data;
 
@@ -14,5 +14,27 @@ public class PollData {
         this.data = data;
     }
 
-    // Getters and setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "PollData{" +
+                "id='" + id + '\'' +
+                ", data='" + data + '\'' +
+                '}';
+    }
 }

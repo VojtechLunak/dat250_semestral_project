@@ -1,7 +1,12 @@
 package hvl.aggregator;
 
 import hvl.aggregator.config.Receiver;
+import hvl.aggregator.model.PollData;
+import hvl.aggregator.service.PollDataService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -21,6 +26,9 @@ public class AggregatorApplication {
 
 	static final String queueName = "poll-data";
 
+	@Autowired
+	private PollDataService pollDataService;
+
 	public static void main(String[] args) throws InterruptedException {
 		SpringApplication.run(AggregatorApplication.class, args).close();
 	}
@@ -28,7 +36,7 @@ public class AggregatorApplication {
 	@RabbitListener(queues = "poll-data")
 	public void receiveMessage(String message) {
 		System.out.println("Message read from poll-data : " + message);
-		//pollService.processPollData(message);
+		pollDataService.processPollData(message);
 	}
 
 	/*
