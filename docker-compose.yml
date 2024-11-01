@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  poll-app:
+    build:
+      context: ./poll-app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rabbitmq
+      - mongodb
+      - neo4j
+
+  aggregator-component:
+    build:
+      context: ./aggregator-component
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - poll-app
+
+  rabbitmq:
+    image: "rabbitmq:4.0-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  mongodb:
+    image: "mongodb/mongodb-community-server:latest"
+    ports:
+      - "27017:27017"
+
+  neo4j:
+    image: "neo4j:latest"
+    ports:
+      - "7473:7473"
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: "neo4j/admin123"
