@@ -1,5 +1,6 @@
 package hvl.dat250.service;
 
+import hvl.dat250.messaging.AggregatorMessagingService;
 import hvl.dat250.model.Poll;
 import hvl.dat250.repository.PollRepository;
 import org.springframework.stereotype.Service;
@@ -12,14 +13,17 @@ import java.util.UUID;
 @Service
 public class PollService {
     private final PollRepository pollRepository;
+    private final AggregatorMessagingService aggregatorMessagingService;
 
-    public PollService(PollRepository pollRepository) {
+    public PollService(PollRepository pollRepository, AggregatorMessagingService aggregatorMessagingService) {
         this.pollRepository = pollRepository;
+        this.aggregatorMessagingService = aggregatorMessagingService;
     }
 
     public Poll createPoll(Poll poll) {
         poll.setPublishedAt(Instant.now());
         poll.setId(UUID.randomUUID().toString());
+        aggregatorMessagingService.sendMessage(poll.getQuestion());
         return pollRepository.save(poll);
     }
 
