@@ -16,8 +16,6 @@ services:
       rabbitmq:
         condition: service_started
 
-
-
   aggregator-component:
     build:
       context: ./aggregator-component
@@ -54,6 +52,14 @@ services:
       timeout: 10s
       retries: 30
       start_period: 5s
+
+  frontend:
+    image: ghcr.io/vojtechlunak/dat250_semestral_project_fe:master
+    ports:
+      - "3000:3000"
+      - "80:80"
+    depends_on:
+      - poll-app
 
 volumes:
   rabbitmq_data:
