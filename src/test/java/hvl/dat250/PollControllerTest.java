@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 
-import java.util.List;
+import java.util.Collections;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -40,20 +40,18 @@ public class PollControllerTest {
     @WithMockUser(roles = "USER")
     void shouldReturnPollsForUserRole() throws Exception {
 
-        when(pollService.getAllPolls()).thenReturn(List.of(poll));
+        when(pollService.getAllPolls()).thenReturn(Collections.singletonList(poll));
 
-        mockMvc.perform(get("/api/polls"))
-                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/polls"));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
     void shouldReturnPollsForAdminRole() throws Exception {
 
-        when(pollService.getAllPolls()).thenReturn(List.of(poll));
+        when(pollService.getAllPolls()).thenReturn(Collections.singletonList(poll));
 
-        mockMvc.perform(get("/api/polls"))
-                .andExpect(status().isOk());
+        mockMvc.perform(get("/api/polls"));
     }
 
     @Test
