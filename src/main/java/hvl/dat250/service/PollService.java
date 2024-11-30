@@ -7,10 +7,7 @@ import hvl.dat250.repository.VoteOptionRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class PollService {
@@ -38,7 +35,12 @@ public class PollService {
                 if (option.getId() == null) {
                     option.setId(UUID.randomUUID().toString());
                 }
-                option.setPoll(poll);
+                List<String> ids = option.getPollIds();
+                if (ids == null) {
+                    ids = new ArrayList<>();
+                    option.setPollIds(ids);
+                }
+                ids.add(poll.getId());
                 savedOptions.add(voteOptionRepository.save(option));
             }
         }

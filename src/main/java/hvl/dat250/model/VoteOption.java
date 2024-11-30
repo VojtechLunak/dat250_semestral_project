@@ -6,6 +6,8 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import java.util.List;
+
 @Node
 public class VoteOption {
     @Id
@@ -18,6 +20,7 @@ public class VoteOption {
     @Relationship(type = "BELONGS_TO")
     @JsonBackReference
     private Poll poll;
+    private List<String> pollIds;
 
     public String getId() {
         return id;
@@ -49,5 +52,13 @@ public class VoteOption {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public List<String> getPollIds() {
+        return pollIds;
+    }
+
+    public void setPollIds(List<String> pollIds) {
+        this.pollIds = pollIds;
     }
 }
