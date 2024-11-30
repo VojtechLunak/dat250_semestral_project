@@ -4,33 +4,40 @@ import hvl.dat250.model.VoteOption;
 import hvl.dat250.repository.VoteOptionRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class VoteOptionService {
+
     private final VoteOptionRepository voteOptionRepository;
 
     public VoteOptionService(VoteOptionRepository voteOptionRepository) {
         this.voteOptionRepository = voteOptionRepository;
     }
 
-    public List<VoteOption> getAllVoteOptions() {
+    public VoteOption createVoteOption(VoteOption voteOption) {
+        return voteOptionRepository.save(voteOption);
+    }
+
+    public Optional<VoteOption> getVoteOptionById(String id) {
+        return voteOptionRepository.findById(id);
+    }
+
+    public Iterable<VoteOption> getAllVoteOptions() {
         return voteOptionRepository.findAll();
     }
 
-    public VoteOption createVoteOption(VoteOption voteOption) {
-        voteOption.setId(UUID.randomUUID().toString());
-        return voteOptionRepository.save(voteOption);
-    }
-
-    public VoteOption getVoteOption(String id) {
-        return voteOptionRepository.findById(id).orElse(null);
-    }
-
-    public VoteOption updateVoteOption(String id, VoteOption voteOption) {
-        voteOption.setId(id);
-        return voteOptionRepository.save(voteOption);
+    public VoteOption updateVoteOption(String id, VoteOption voteOptionDetails) {
+        Optional<VoteOption> existingVoteOption = voteOptionRepository.findById(id);
+        if (existingVoteOption.isPresent()) {
+            VoteOption voteOption = existingVoteOption.get();
+            voteOption.setCaption(voteOptionDetails.getCaption());
+            voteOption.setPresentationOrder(voteOptionDetails.getPresentationOrder());
+            voteOption.setPoll(voteOptionDetails.getPoll());
+            return voteOptionRepository.save(voteOption);
+        } else {
+            throw new RuntimeException("VoteOption not found with id: " + id);
+        }
     }
 
     public void deleteVoteOption(String id) {

@@ -4,31 +4,40 @@ import hvl.dat250.model.Vote;
 import hvl.dat250.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VoteService {
+
     private final VoteRepository voteRepository;
 
     public VoteService(VoteRepository voteRepository) {
         this.voteRepository = voteRepository;
     }
 
-    public List<Vote> getAllVotes() {
-        return voteRepository.findAll();
-    }
-
     public Vote createVote(Vote vote) {
         return voteRepository.save(vote);
     }
 
-    public Vote getVote(String id) {
-        return voteRepository.findById(id).orElse(null);
+    public Optional<Vote> getVoteById(String id) {
+        return voteRepository.findById(id);
     }
 
-    public Vote updateVote(String id, Vote vote) {
-        vote.setId(id);
-        return voteRepository.save(vote);
+    public Iterable<Vote> getAllVotes() {
+        return voteRepository.findAll();
+    }
+
+    public Vote updateVote(String id, Vote voteDetails) {
+        Optional<Vote> existingVote = voteRepository.findById(id);
+        if (existingVote.isPresent()) {
+            Vote vote = existingVote.get();
+            vote.setPublishedAt(voteDetails.getPublishedAt());
+            vote.setVoteOption(voteDetails.getVoteOption());
+            vote.setUser(voteDetails.getUser());
+            return voteRepository.save(vote);
+        } else {
+            throw new RuntimeException("Vote not found with id: " + id);
+        }
     }
 
     public void deleteVote(String id) {

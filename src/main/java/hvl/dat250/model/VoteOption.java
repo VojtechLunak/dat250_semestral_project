@@ -1,5 +1,6 @@
 package hvl.dat250.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
@@ -15,6 +16,7 @@ public class VoteOption {
     private int presentationOrder;
 
     @Relationship(type = "BELONGS_TO")
+    @JsonBackReference
     private Poll poll;
 
     public String getId() {

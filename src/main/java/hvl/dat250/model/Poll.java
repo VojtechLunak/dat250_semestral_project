@@ -1,5 +1,6 @@
 package hvl.dat250.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
@@ -22,6 +23,7 @@ public class Poll {
     private Instant validUntil;
 
     @Relationship(type = "HAS_OPTION")
+    @JsonManagedReference
     private Set<VoteOption> voteOptions = new HashSet<>();
 
     @Relationship(type = "HAS_VOTE")
