@@ -13,9 +13,12 @@ docker run --name neo4j-container \
 ```
 
 
-In docker go to files and change neo4j.conf by uncommenting line:
+In docker go to files and change neo4j.conf by enabling line:
 
 ``dbms.security.auth_enabled=false``
 
+# Important Links & Info
 
-link: https://medium.com/@hassaanistic/unclickable-folder-in-repo-on-github-arrow-on-folder-b8fa21b13858
+For JSON Web Tokens testing [JWT](https://jwt.io/)
+
+For Chrome without CORS errors [CORS](https://medium.com/@beligh.hamdi/run-chrome-browser-without-cors-872747142c61)

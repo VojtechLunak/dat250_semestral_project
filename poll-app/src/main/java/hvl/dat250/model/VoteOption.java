@@ -1,9 +1,12 @@
 package hvl.dat250.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
+
+import java.util.List;
 
 @Node
 public class VoteOption {
@@ -15,7 +18,9 @@ public class VoteOption {
     private int presentationOrder;
 
     @Relationship(type = "BELONGS_TO")
+    @JsonBackReference
     private Poll poll;
+    private List<String> pollIds;
 
     public String getId() {
         return id;
@@ -47,5 +52,13 @@ public class VoteOption {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public List<String> getPollIds() {
+        return pollIds;
+    }
+
+    public void setPollIds(List<String> pollIds) {
+        this.pollIds = pollIds;
     }
 }
