@@ -37,6 +37,8 @@ services:
     image: "mongodb/mongodb-community-server:latest"
     ports:
       - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
 
   neo4j:
     image: "neo4j:latest"
@@ -46,6 +48,8 @@ services:
       - "7687:7687"
     environment:
       NEO4J_AUTH: "neo4j/admin123"
+    volumes:
+      - neo4j_data:/data
     healthcheck:
       test: wget http://localhost:7474 || exit 1
       interval: 4s
@@ -63,3 +67,8 @@ services:
 
 volumes:
   rabbitmq_data:
+    driver: local
+  neo4j_data:
+    driver: local
+  mongodb_data:
+    driver: local

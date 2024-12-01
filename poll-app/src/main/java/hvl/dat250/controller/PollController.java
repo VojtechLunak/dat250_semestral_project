@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*", allowCredentials = "true")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:80"}, allowedHeaders = "*", allowCredentials = "true")
 @RestController
 @RequestMapping("/api/polls")
 public class PollController {

@@ -16,7 +16,7 @@ public class PollService {
     private final AggregatorMessagingService aggregatorMessagingService;
     private final VoteOptionRepository voteOptionRepository;
 
-    public PollService(PollRepository pollRepository, AggregatorMessagingService aggregatorMessagingService) {
+    public PollService(PollRepository pollRepository, AggregatorMessagingService aggregatorMessagingService, VoteOptionRepository voteOptionRepository) {
         this.pollRepository = pollRepository;
         this.voteOptionRepository = voteOptionRepository;
         this.aggregatorMessagingService = aggregatorMessagingService;

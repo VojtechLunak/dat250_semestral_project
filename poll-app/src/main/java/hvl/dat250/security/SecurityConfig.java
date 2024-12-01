@@ -49,7 +49,7 @@ public class SecurityConfig {
     public CorsRegistry corsRegistry() {
         CorsRegistry registry = new CorsRegistry();
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
+                .allowedOrigins("http://localhost:3000", "http://localhost:80")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);
