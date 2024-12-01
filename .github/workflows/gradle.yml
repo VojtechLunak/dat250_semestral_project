@@ -22,10 +22,10 @@ jobs:
       uses: gradle/actions/setup-gradle@v3
       
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -p poll-app
       
     - name: Gradle compile
-      run: ./gradlew compileJava
+      run: ./gradlew compileJava -p poll-app
       
     - name: Gradle test
-      run: ./gradlew test
+      run: ./gradlew test -p poll-app
